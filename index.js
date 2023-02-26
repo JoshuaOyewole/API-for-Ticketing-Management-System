@@ -10,8 +10,9 @@ dotenv.config();
 const arrivalRoute = require('./routes/location/arrival');
 const departureRoute = require('./routes/location/departure');
 const ticketRoute = require('./routes/ticket');
+const flightRoute = require('./routes/flight')
 
-const PORT = 5100 || process.env.PORT ;
+const PORT =process.env.PORT ;
 
 //DB INITIALIZATION
 dbConnect();
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use('/arrival', arrivalRoute);
 app.use('/departure', departureRoute);
 app.use('/ticket', ticketRoute);
+app.use('/flights', flightRoute);
 
 //ERROR HANDLING MIDDLEWARE
 app.use((err, req, res, next) => {
