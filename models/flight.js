@@ -1,27 +1,53 @@
 const mongoose = require ('mongoose');
 
 const flightSchema = new mongoose.Schema({
-    
-    flyingFrom: {
-        type: String,
+    currency:{
+        type:String,
         required: true,
-        maxLength:150,
+        maxLength:50,
     },
-    flyingTo: {
-        type: String,
+    outbound:{
+        type:{
+            airport_from:{
+                type: String,
+                required: true,
+                maxLength:150,
+            },
+            airport_to:{
+                type: String,
+                required: true,
+                maxLength:150,
+            },
+            departure_time:{
+                type: [Date],
+                required: true,
+                maxLength:150,
+                unique:true
+            },
+            arrival_time:{
+                type: [Date],
+                required: true,
+                maxLength:150,
+                unique:true
+            },
+            flight_number:{
+                type: String,
+                required: true,
+                maxLength:150,
+            },
+            duration:{
+                type:Number,
+                required: true,
+                maxLength:150,
+            },
+        },
         required: true,
-        maxLength:150,
+        maxLength:50,
     },
-    departureDate:{
-        type: Date,
+    prices: {
+        type: [Number],
         required: true,
-        maxLength: 200,
-    },
-    price: {
-        type: Number,
-        required: true,
-        maxLength:150,
-    },
+    }
 },{timestamps:true});   
 
 module.exports = mongoose.model('flights', flightSchema);

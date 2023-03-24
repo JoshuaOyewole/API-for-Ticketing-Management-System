@@ -3,18 +3,19 @@ const createError = require("../util/error");
 
 //ADD FLIGHT
 const addFlight = async (req, res, next) => {
-  const { flyingFrom, flyingTo, departureDate } = req.body;
+  const { outbound } = req.body;
+  const { airport_from, airport_to, departure_time } = outbound;
 
-  if (!flyingFrom || flyingFrom == " " || !flyingTo  || flyingTo == " " || !departureDate || departureDate == " " ){
+  if (!airport_from || airport_from == " " || !airport_to  || airport_to == " " || !departure_time || departure_time == " " ){
     return next(createError(404, "Kindly Fill the required Fields!"));
   }
   
   /* CHECK IF SAME FLIGHT ALREADY EXIST */
   try {
     const findFlight = await Flights.find({
-      flyingFrom: `${flyingFrom}`,
-      flyingTo: `${flyingTo}`,
-      departureDate: `${departureDate}`,
+      airport_from: `${airport_from}`,
+      airport_to: `${airport_to}`,
+      departure_time: `${departure_time}`,
     });
 
     if (findFlight.length === 0) {
@@ -33,12 +34,12 @@ const addFlight = async (req, res, next) => {
 //FIND FLIGHT
 const findFlight = async (req, res, next) => {
  
-const { flyingFrom, flyingTo} = req.query;
+const { airport_from, airport_to} = req.query;
 
   try {
     const findFlight = await Flights.find({
-      flyingFrom: `${flyingFrom}`,
-      flyingTo: `${flyingTo}`,
+      airport_from: `${airport_from}`,
+      airport_to: `${airport_to}`,
     });
 
     if (findFlight.length === 0) {
